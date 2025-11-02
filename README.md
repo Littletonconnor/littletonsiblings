@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Littleton Siblings Health Check 💙
 
-## Getting Started
+A cute family health check app where siblings can submit weekly status updates with messages and mood scores.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🔐 Secure login for family members
+- 📝 Weekly check-ins with messages and mood ratings (1-4)
+- 📊 Public JSON healthcheck endpoint
+- 🎨 Beautiful, warm UI with custom color palette
+- 📱 Mobile-responsive design
+
+## Quick Start
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Set up environment variables**
+   - Copy `.env.example` to `.env.local`
+   - Fill in your Supabase credentials
+   - Generate a NEXTAUTH_SECRET
+
+3. **Set up the database**
+   - Run the SQL schema in your Supabase dashboard
+   - See `SETUP.md` for detailed instructions
+
+4. **Seed users**
+   ```bash
+   npm run seed
+   ```
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. Visit [http://localhost:3000](http://localhost:3000)
+
+## Documentation
+
+See [SETUP.md](./SETUP.md) for comprehensive setup instructions, deployment guide, and troubleshooting.
+
+## API Endpoints
+
+### GET /api/healthcheck
+Public endpoint that returns the latest update for each user.
+
+**Response:**
+```json
+[
+  {
+    "displayName": "Connor",
+    "lastUpdatedAt": "2025-11-01T12:00:00Z",
+    "message": "Great week! Launched a new project.",
+    "score": 4
+  }
+]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### POST /api/updates
+Authenticated endpoint to submit a new weekly update.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Body:**
+```json
+{
+  "message": "Had a great week!",
+  "score": 4
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+- **Framework**: Next.js 14 (App Router)
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: NextAuth.js
+- **Styling**: Tailwind CSS
+- **Hosting**: Vercel
 
-To learn more about Next.js, take a look at the following resources:
+## Color Palette
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Background: `#fffffe`
+- Card: `#faeee7`
+- Headline: `#33272a`
+- Paragraph: `#594a4e`
+- Highlight: `#ff8ba7`
+- Secondary: `#ffc6c7`
+- Tertiary: `#c3f0ca`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deploy to Vercel with one click or follow the deployment guide in [SETUP.md](./SETUP.md).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/littletonsiblings-healthcheck)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Phase 2: SMS Notifications ✅
+
+- 📲 SMS reminders via Twilio for overdue check-ins (Mondays at 9 AM)
+- 📅 Weekly family summary messages every Sunday (Sundays at 6 PM)
+
+See [TWILIO_SETUP.md](./TWILIO_SETUP.md) for setup instructions.
+
+### Future Enhancements
+
+- 📈 Historical view of all updates in the UI
+- 📊 Analytics dashboard for family check-in trends
+
+## License
+
+Private family project
