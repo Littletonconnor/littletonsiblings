@@ -26,8 +26,8 @@ CREATE INDEX IF NOT EXISTS idx_updates_week_start_date ON updates(week_start_dat
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE updates ENABLE ROW LEVEL SECURITY;
 
--- Policies for users table (read-only for authenticated users)
-CREATE POLICY "Users can read their own data" ON users
+-- Policies for users table
+CREATE POLICY "Users can read all user data" ON users
   FOR SELECT
   USING (true);
 
@@ -39,4 +39,3 @@ CREATE POLICY "Users can read all updates" ON updates
 CREATE POLICY "Users can insert their own updates" ON updates
   FOR INSERT
   WITH CHECK (true);
-

@@ -28,7 +28,7 @@ export default function LoginPage() {
       } else {
         router.push("/submit");
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -36,21 +36,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: "#fffffe" }}>
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-background">
       <div className="w-full max-w-md">
-        <div className="rounded-2xl shadow-lg p-8" style={{ backgroundColor: "#faeee7" }}>
+        <div className="rounded-2xl shadow-lg p-8 bg-card">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2" style={{ color: "#33272a" }}>
+            <h1 className="text-3xl font-bold mb-2 text-headline">
               Littleton Siblings
             </h1>
-            <p className="text-lg" style={{ color: "#594a4e" }}>
+            <p className="text-lg text-paragraph">
               How was your week? 💙
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium mb-2" style={{ color: "#33272a" }}>
+              <label htmlFor="username" className="block text-sm font-medium mb-2 text-headline">
                 Username
               </label>
               <input
@@ -58,19 +58,14 @@ export default function LoginPage() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-highlight transition-colors"
-                style={{
-                  backgroundColor: "#fffffe",
-                  borderColor: "#ffc6c7",
-                  color: "#33272a"
-                }}
+                className="w-full px-4 py-3 rounded-lg border-2 border-secondary bg-background text-headline focus:outline-none focus:border-highlight transition-colors"
                 placeholder="Enter your username"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2" style={{ color: "#33272a" }}>
+              <label htmlFor="password" className="block text-sm font-medium mb-2 text-headline">
                 Password
               </label>
               <input
@@ -78,19 +73,14 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-highlight transition-colors"
-                style={{
-                  backgroundColor: "#fffffe",
-                  borderColor: "#ffc6c7",
-                  color: "#33272a"
-                }}
+                className="w-full px-4 py-3 rounded-lg border-2 border-secondary bg-background text-headline focus:outline-none focus:border-highlight transition-colors"
                 placeholder="Enter your password"
                 required
               />
             </div>
 
             {error && (
-              <div className="text-sm text-center p-3 rounded-lg" style={{ backgroundColor: "#ffc6c7", color: "#33272a" }}>
+              <div className="text-sm text-center p-3 rounded-lg bg-secondary text-headline">
                 {error}
               </div>
             )}
@@ -98,8 +88,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg font-semibold transition-all hover:opacity-90 disabled:opacity-50"
-              style={{ backgroundColor: "#ff8ba7", color: "#fffffe" }}
+              className="w-full py-3 rounded-lg font-semibold bg-highlight text-background transition-all hover:opacity-90 disabled:opacity-50"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>

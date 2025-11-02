@@ -33,27 +33,27 @@ function askQuestion(query: string): Promise<string> {
 const users = [
   {
     username: "connor",
-    password: "temppass123",
+    password: "password123",
     display_name: "Connor",
   },
   {
     username: "justin",
-    password: "justinlovesapples123",
+    password: "password123",
     display_name: "Justin",
   },
   {
     username: "kyle",
-    password: "kylelovesapples123",
+    password: "password123",
     display_name: "Kyle",
   },
   {
     username: "josh",
-    password: "joshlovesapples123",
+    password: "password123",
     display_name: "Josh",
   },
   {
     username: "zoe",
-    password: "zoelovesapples123",
+    password: "password123",
     display_name: "Zoe",
   },
 ];
@@ -138,7 +138,9 @@ async function seed() {
   console.log(`   ❌ Errors: ${errorCount}`);
 
   if (addedCount > 0) {
-    console.log("\n🔒 Remember to share passwords securely with your family!");
+    console.log("\n🔒 IMPORTANT: All users have temporary password 'password123'");
+    console.log("   Each family member should change their password after first login!");
+    console.log("   Go to Settings → Change Password after logging in.");
   }
 }
 
