@@ -59,10 +59,6 @@ export function Header() {
             {status === "loading" ? (
               <div className="text-sm text-paragraph">Loading...</div>
             ) : session ? (
-              <>
-                <span className="text-sm text-paragraph hidden sm:inline">
-                  {session.user?.name}
-                </span>
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-highlight text-background hover:opacity-90 transition-opacity text-sm font-medium"
@@ -70,7 +66,6 @@ export function Header() {
                   <LogOut className="w-4 h-4" />
                   <span>Sign Out</span>
                 </button>
-              </>
             ) : (
               <button
                 onClick={() => signIn()}

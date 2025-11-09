@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar, User } from "lucide-react";
+import Link from "next/link";
 
 const scoreEmojis = {
   1: "😔",
@@ -48,14 +49,15 @@ export default function HistoryPage() {
 
   const fetchHistory = async () => {
     try {
-      const response = await fetch("/api/updates/history");
+      const response = await fetch("/api/history");
       if (response.ok) {
         const data = await response.json();
         setUpdates(data);
       } else {
         setError("Failed to load history");
       }
-    } catch (err) {
+    } catch (error) {
+      console.error(error);
       setError("Something went wrong");
     } finally {
       setLoading(false);
@@ -98,7 +100,9 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-headline mb-2">Check-in History</h1>
+          <h1 className="text-3xl font-bold text-headline mb-2">
+            Check-in History
+          </h1>
           <p className="text-paragraph">
             All family check-ins from everyone 💙
           </p>
@@ -124,35 +128,45 @@ export default function HistoryPage() {
                 key={update.id}
                 className="bg-card rounded-xl p-6 shadow-md border-2 border-secondary hover:border-highlight transition-colors"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex items-center space-x-2 text-headline font-semibold">
-                      <User className="w-4 h-4" />
-                      <span>{update.displayName}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-3xl">
-                        {scoreEmojis[update.score as keyof typeof scoreEmojis]}
-                      </span>
-                      <span className="text-sm text-paragraph">
-                        {scoreLabels[update.score as keyof typeof scoreLabels]}
-                      </span>
+                <Link href={`updates/${update.id}`}>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-2 text-headline font-semibold">
+                        <User className="w-4 h-4" />
+                        <span>{update.displayName}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-3xl">
+                          {
+                            scoreEmojis[
+                              update.score as keyof typeof scoreEmojis
+                            ]
+                          }
+                        </span>
+                        <span className="text-sm text-paragraph">
+                          {
+                            scoreLabels[
+                              update.score as keyof typeof scoreLabels
+                            ]
+                          }
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <p className="text-paragraph mb-4 text-base leading-relaxed">
-                  {update.message}
-                </p>
-
-                <div className="flex items-center space-x-4 text-xs text-paragraph">
-                  <div className="flex items-center space-x-1">
-                    <Calendar className="w-3 h-3" />
-                    <span>Week of {formatWeekDate(update.weekStartDate)}</span>
+                  <p className="text-paragraph mb-4 text-base leading-relaxed">
+                    {update.message}
+                  </p>
+                  <div className="flex items-center space-x-4 text-xs text-paragraph">
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>
+                        Week of {formatWeekDate(update.weekStartDate)}
+                      </span>
+                    </div>
+                    <span>•</span>
+                    <span>Submitted {formatDate(update.createdAt)}</span>
                   </div>
-                  <span>•</span>
-                  <span>Submitted {formatDate(update.createdAt)}</span>
-                </div>
+                </Link>
               </div>
             ))}
           </div>

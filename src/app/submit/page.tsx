@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -52,14 +52,12 @@ export default function SubmitPage() {
 
       if (response.ok) {
         setSubmitted(true);
-        setTimeout(() => {
-          signOut({ callbackUrl: "/" });
-        }, 3000);
+        router.push("/history");
       } else {
         alert("Failed to submit update. Please try again.");
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
       alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -74,9 +72,7 @@ export default function SubmitPage() {
           <h2 className="text-2xl font-bold mb-2 text-headline">
             Thanks for checking in!
           </h2>
-          <p className="text-paragraph">
-            See you next week 💙
-          </p>
+          <p className="text-paragraph">See you next week 💙</p>
         </div>
       </div>
     );
@@ -90,14 +86,15 @@ export default function SubmitPage() {
             <h1 className="text-3xl font-bold mb-2 text-headline">
               How was your week, {session?.user?.name}?
             </h1>
-            <p className="text-paragraph">
-              Share what&apos;s been going on 💭
-            </p>
+            <p className="text-paragraph">Share what&apos;s been going on 💭</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2 text-headline">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium mb-2 text-headline"
+              >
                 Your week in a nutshell
               </label>
               <textarea

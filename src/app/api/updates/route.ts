@@ -51,6 +51,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to create update" },
       { status: 500 }
@@ -58,3 +59,37 @@ export async function POST(request: Request) {
   }
 }
 
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const updateId = searchParams.get("updateId");
+    if (!updateId) {
+      return NextResponse.json({ error: "ID is required" }, { status: 400 });
+    }
+
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { data, error } = await supabase
+      .from("updates")
+      .select("*")
+      .eq("id", updateId)
+      .single();
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ item: data }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to get update" },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ status: "created" });
+}
