@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/seed.ts",
-    "prettier:write": "prettier src/**/*.ts"
+    "prettier:write": "prettier src/**/*.ts",
+    "types:generate": "supabase gen types typescript --linked > src/types/supabase.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.78.0",
@@ -30,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "prettier": "^3.6.2",
+    "supabase": "^2.54.11",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
     "typescript": "^5"

@@ -4,5 +4,6 @@ A cute family health check app where siblings can submit weekly status updates w
 
 ## TODO
 
-- Set up updates route with nice UI and ability to add comments.
+- Setup updates route to add comments.
 - Set up dev DB environment so I can test without affecting production.
+- Add pagination to history page.

@@ -14,9 +14,14 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <Heart className="w-6 h-6 text-highlight group-hover:scale-110 transition-transform" fill="#ff8ba7" />
-              <span className="text-xl font-bold text-headline">Littleton Siblings</span>
+            <Link href="/submit" className="flex items-center space-x-2 group">
+              <Heart
+                className="w-6 h-6 text-highlight group-hover:scale-110 transition-transform"
+                fill="#ff8ba7"
+              />
+              <span className="text-xl font-bold text-headline">
+                Littleton Siblings
+              </span>
             </Link>
 
             {session && (
@@ -59,13 +64,13 @@ export function Header() {
             {status === "loading" ? (
               <div className="text-sm text-paragraph">Loading...</div>
             ) : session ? (
-                <button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-highlight text-background hover:opacity-90 transition-opacity text-sm font-medium"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Sign Out</span>
-                </button>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-highlight text-background hover:opacity-90 transition-opacity text-sm font-medium"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
             ) : (
               <button
                 onClick={() => signIn()}
