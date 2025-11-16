@@ -27,7 +27,7 @@ export default function SettingsPage() {
   }
 
   if (status === "unauthenticated") {
-    router.push("/");
+    router.push("/login");
     return null;
   }
 

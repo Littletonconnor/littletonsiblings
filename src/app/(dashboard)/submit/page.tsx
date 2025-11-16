@@ -28,7 +28,7 @@ export default function SubmitPage() {
   }
 
   if (status === "unauthenticated") {
-    router.push("/");
+    router.push("/login");
     return null;
   }
 
